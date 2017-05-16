@@ -27,6 +27,6 @@ var app = http.createServer(
 			}
 		).resume();
 	}
-).listen(port);
+).listen(port, '0.0.0.0');
 
 console.log('The server is running');
