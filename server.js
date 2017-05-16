@@ -8,12 +8,17 @@ var http = require('http');
 var port = process.env.PORT;
 var directory = (__dirname + '/public');
 
+console.log('port:', port);
+console.log('!port:', !port);
+
 /* If we aren't on Heroku, then we need to readjust the port and directory 
  * information and we know that because port won't be set */
+/*
 if (typeof port == 'undefined' || !port) {
 	directory = './public';
 	port = 8080;
 }
+*/
 
 /* Set up a static webserver that will deliver files from the filesystem */
 var file = new static.Server(directory);
@@ -30,3 +35,9 @@ var app = http.createServer(
 ).listen(port);
 
 console.log('The server is running');
+
+var testBool = typeof false;
+console.log('testBool:', testBool);
+var typeTestBool = typeof testBool; 
+console.log('typeTestBool:', typeTestBool);
+console.log('port:', port);
