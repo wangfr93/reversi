@@ -32,7 +32,7 @@ var app = http.createServer(
 			}
 		).resume();
 	}
-).listen(port || 5000);
+).listen(port || 80);
 
 console.log('The server is running');
 
@@ -41,6 +41,6 @@ console.log('testBool:', testBool);
 var typeTestBool = typeof testBool; 
 console.log('typeTestBool:', typeTestBool);
 console.log('port:', port);
-var portOption = (port || 5000);
+var portOption = (port || 80);
 console.log('portOption:', portOption);
 
