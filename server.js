@@ -10,7 +10,7 @@ var directory = (__dirname + '/public');
 
 /* If we aren't on Heroku, then we need to readjust the port and directory 
  * information and we know that because port won't be set */
-if ((typeof port == 'undefined') || !port) {
+if (typeof port == 'undefined' || !port) {
 	directory = './public';
 	port = 8080;
 }
