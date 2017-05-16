@@ -1,0 +1,27 @@
+{
+  "name": "reversi",
+  "version": "1.0.0",
+  "description": "This is the game of reversi",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wangfr93/reversi.git"
+  },
+  "keywords": [
+    "reversi",
+    "felicia"
+  ],
+  "author": "Felicia Wang",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/wangfr93/reversi/issues"
+  },
+  "homepage": "https://github.com/wangfr93/reversi#readme",
+  "dependencies": {
+    "node-static": "^0.7.9",
+    "socket.io": "^2.0.1"
+  }
+}
