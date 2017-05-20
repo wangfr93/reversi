@@ -8,8 +8,8 @@ var http = require('http');
 var port = process.env.PORT;
 var directory = (__dirname + '/public');
 
-console.log('port:', port);
-console.log('!port:', !port);
+// console.log('port:', port);
+// console.log('!port:', !port);
 
 /* If we aren't on Heroku, then we need to readjust the port and directory 
  * information and we know that because port won't be set */
@@ -34,11 +34,13 @@ var app = http.createServer(
 
 console.log('The server is running');
 
-var testBool = typeof false;
-console.log('testBool:', testBool);
-var typeTestBool = typeof testBool; 
+/*
+var portType = typeof port;
+console.log('portType:', portType);
+var typeTestBool = typeof portType; 
 console.log('typeTestBool:', typeTestBool);
 console.log('port:', port);
 var portOption = (port || 80);
 console.log('portOption:', portOption);
+*/
 
