@@ -1,9 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>
+      Enter your username for Reversi
+    </title>
+
 
     <style>
       #headerRow {
@@ -11,19 +15,46 @@
       }
     </style>
 
+    <script>
+
+        function submitForm() {
+          var username = $('#username').val();
+          window.location.href = 'lobby.html?username=' + username;
+        }
+
+    </script>
+
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
   </head>
   <body>
 
     <div class="container-fluid text-center">
+
       <div class="row" id="headerRow">
         <div class="col">
           <h2>
-            This is the name page
+            Enter your username for Reversi
           </h2>
         </div>
       </div>
+
+      <div class='row'>
+        <div class='col'>
+          <form onsubmit='submitForm(); return false;' class='form-inline'>
+            <div class='form-group'>
+              <label for='username' class='col-form-label sr-only'>
+                Enter a username
+              </label>
+              <input class='form-control' type='text' value='' id='username' placeholder='Enter your username' />
+            </div>
+            <button type='submit' class='btn btn-default btn-primary'>
+              Done
+            </button>
+          </form>
+        </div>
+      </div>
+
     </div>
 
     <!-- jQuery first, then Tether, then Bootstrap JS. -->
