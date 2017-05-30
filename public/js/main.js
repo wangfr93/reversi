@@ -101,6 +101,7 @@ socket.on('join_room_response', function(payload) {
 
 /* What to do when the server responds that someone has left the room */
 socket.on('player_disconnected', function(payload) {
+
 	if(payload.result == 'fail') {
 		alert(payload.message);
 		return;
@@ -114,7 +115,7 @@ socket.on('player_disconnected', function(payload) {
 	/* If someone left the room, then animate out all their content */
 	var domElements = $('.socket_' + payload.socket_id);
 	/* If something exists */
-	if(domElements.length != 0) {
+	if(domElements.length !== 0) {
 		domElements.slideUp(1000);
 	}
 
