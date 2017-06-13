@@ -304,8 +304,7 @@ socket.on('game_update', function(payload) {
 					];
 
 	var my_color = ' ';
-
- 
+	var interval_timer;
 
 	/* Check for a good board in the payload */
 	var board = payload.game.board; 
@@ -327,6 +326,24 @@ socket.on('game_update', function(payload) {
 	}
 
 	$('#my_color').html('<h3 id="my_color">I am ' + my_color + '</h3>');
+	$('#my_color').append('<h4>It is ' + payload.game.whose_turn + '\'s turn. Elapsed time <span id="elapsed"></span></h4>');
+
+	clearInterval(interval_timer);
+	interval_timer = setInterval( function(last_time) {
+		return function() {
+			// Do the work of updating the UI
+			var d = new Date();
+			var elapsedMilli = d.getTime() - last_time;
+			var minutes = Math.floor(elapsedMilli / (60 * 1000));
+			var seconds = Math.floor((elapsedMilli % (60 * 1000)) / 1000);
+
+			if(seconds < 10) {
+				$('#elapsed').html(minutes + ':0' + seconds);
+			} else {
+				$('#elapsed').html(minutes + ':' + seconds);
+			}
+		}} (payload.game.last_move_time)
+		, 1000);
 
 	/* Animate changes to the board */
 
@@ -353,7 +370,6 @@ socket.on('game_update', function(payload) {
 				} else if(old_board[row][col] == '?' && board[row][col] == 'b') {
 					$('#' + row + '_' + col).html('<img src="assets/images/empty-to-gray.gif" alt="black  square" />');
 				} else if(old_board[row][col] == ' ' && board[row][col] == 'w') {
-					console.log('TEST');
 					$('#' + row + '_' + col).html('<img src="assets/images/empty-to-teal.gif" alt="white square" />');
 				} else if(old_board[row][col] == ' ' && board[row][col] == 'b') {
 					$('#' + row + '_' + col).html('<img src="assets/images/empty-to-gray.gif" alt="white square" />');
@@ -362,16 +378,21 @@ socket.on('game_update', function(payload) {
 				} else if(old_board[row][col] == 'b' && board[row][col] == ' ') {
 					$('#' + row + '_' + col).html('<img src="assets/images/gray-to-empty.gif" alt="empty square" />');
 				} else if(old_board[row][col] == 'w' && board[row][col] == 'b') {
+					console.log('IT WORKED.');
 					$('#' + row + '_' + col).html('<img src="assets/images/teal-to-gray.gif" alt="black square" />');
 				} else if(old_board[row][col] == 'b' && board[row][col] == 'w') {
 					$('#' + row + '_' + col).html('<img src="assets/images/gray-to-teal.gif" alt="white square" />');
 				} else {
 					$('#' + row + '_' + col).html('<img src="assets/images/error.gif" alt="error" />');
 				}
+			}
 
-				/* Set up interactivity */
-				$('#' + row + '_' + col).off('click');
-				if(board[row][col] == ' ') {
+			/* Set up interactivity */
+			$('#' + row + '_' + col).off('click');
+			$('#' + row + '_' + col).removeClass('hovered_over');
+
+			if(payload.game.whose_turn === my_color) {
+				if(payload.game.legal_moves[row][col] === my_color.substr(0, 1)) {
 					$('#' + row + '_' + col).addClass('hovered_over');
 					$('#' + row + '_' + col).click(function(r, c) {
 						return function() {
@@ -383,10 +404,7 @@ socket.on('game_update', function(payload) {
 							socket.emit('play_token', payload);				
 						};
 					}(row, col));
-				} else {
-					$('#' + row + '_' + col).removeClass('hovered_over');
-				}
-
+				} 
 			}
 		}
 	}
@@ -402,7 +420,7 @@ socket.on('play_token_response', function(payload) {
 	/* Check for a good play token response */
 	if(payload.result == 'fail') {
 		console.log(payload.message);
-		alert(payload.meessage);
+		alert(payload.message);
 		return;
 	}
 
