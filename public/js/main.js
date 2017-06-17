@@ -325,8 +325,16 @@ socket.on('game_update', function(payload) {
 		return;
 	}
 
-	$('#my_color').html('<h3 id="my_color">I am ' + my_color + '</h3>');
-	$('#my_color').append('<h4>It is ' + payload.game.whose_turn + '\'s turn. Elapsed time <span id="elapsed"></span></h4>');
+	var playerGraphic = '<img src="assets/images/empty-to-teal.png" width="64px" alt="black  square" />';
+	var opponentGraphic = '<img src="assets/images/empty-to-gray.png" width="64px" alt="black  square" />';
+	if(my_color === "black") {
+		var playerGraphic = '<img src="assets/images/empty-to-gray.png" width="64px" alt="black  square" />';
+		var opponentGraphic = '<img src="assets/images/empty-to-teal.png" width="64px" alt="black  square" />';
+	}
+	$('#my_color').html('<h3 id="my_color">I am ' + playerGraphic + '</h3>');
+	$('#my_color').append('<h4>It is ' + opponentGraphic + '\'s turn. Elapsed time <span id="elapsed"></span></h4>');
+	// $('#my_color').html('<h3 id="my_color">I am ' + my_color + '</h3>');
+	// $('#my_color').append('<h4>It is ' + payload.game.whose_turn + '\'s turn. Elapsed time <span id="elapsed"></span></h4>');
 
 	clearInterval(interval_timer);
 	interval_timer = setInterval( function(last_time) {
