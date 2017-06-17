@@ -366,9 +366,9 @@ socket.on('game_update', function(payload) {
 				if(old_board[row][col] == '?' && board[row][col] == ' ') {
 					$('#' + row + '_' + col).html('<img src="assets/images/empty.gif" alt="empty square" />');
 				} else if(old_board[row][col] == '?' && board[row][col] == 'w') {
-					$('#' + row + '_' + col).html('<img src="assets/images/empty-to-teal.gif" alt="white square" />');
+					$('#' + row + '_' + col).html('<img src="assets/images/empty-to-teal.png" width="64px" alt="white square" />');
 				} else if(old_board[row][col] == '?' && board[row][col] == 'b') {
-					$('#' + row + '_' + col).html('<img src="assets/images/empty-to-gray.gif" alt="black  square" />');
+					$('#' + row + '_' + col).html('<img src="assets/images/empty-to-gray.png" width="64px" alt="black  square" />');
 				} else if(old_board[row][col] == ' ' && board[row][col] == 'w') {
 					$('#' + row + '_' + col).html('<img src="assets/images/empty-to-teal.gif" alt="white square" />');
 				} else if(old_board[row][col] == ' ' && board[row][col] == 'b') {
