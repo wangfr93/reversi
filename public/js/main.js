@@ -326,10 +326,12 @@ socket.on('game_update', function(payload) {
 	}
 
 	var playerGraphic = '<img src="assets/images/empty-to-teal.png" width="64px" alt="black  square" />';
-	var opponentGraphic = '<img src="assets/images/empty-to-gray.png" width="64px" alt="black  square" />';
+	var opponentGraphic = '<img src="assets/images/empty-to-teal.png" width="64px" alt="black  square" />';
 	if(my_color === "black") {
 		var playerGraphic = '<img src="assets/images/empty-to-gray.png" width="64px" alt="black  square" />';
-		var opponentGraphic = '<img src="assets/images/empty-to-teal.png" width="64px" alt="black  square" />';
+	}
+	if(payload.game.whose_turn === "black") {
+		var opponentGraphic = '<img src="assets/images/empty-to-gray.png" width="64px" alt="black  square" />';
 	}
 	$('#my_color').html('<h3 id="my_color">I am ' + playerGraphic + '</h3>');
 	$('#my_color').append('<h4>It is ' + opponentGraphic + '\'s turn. Elapsed time <span id="elapsed"></span></h4>');
